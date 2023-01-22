@@ -1,6 +1,7 @@
 FROM alpine:latest
 
 MAINTAINER 	Crispin Tschirky <crispin.tschirky@gmail.com>
+LABEL org.opencontainers.image.description='Provides Qemu Guest Agent using talosctl to shutdown/reboot host node. Intended as daemonset for talos running on proxmox'
 
 COPY ./scripts/shutdown /sbin/shutdown
 
