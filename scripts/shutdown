@@ -1,0 +1,50 @@
+#!/bin/sh
+# (c) 2023 by Crispin Tschirky <crispin.tschirky@gmail.com> 
+#
+# Licensed under BSD-3 License, see https://opensource.org/licenses/BSD-3-Clause
+#
+# Replacement for shutdown on pod which invokes the operation on the real host
+# can be used for qemu-guest-agent daemon pod to reboot the host in case e.g. proxmox requests it
+#
+
+
+logw(){
+  echo [`date -u -Iseconds`] [WARN] [$HOSTNAME] - "$1" >> /proc/1/fd/0
+}
+
+logi(){
+  echo [`date -u -Iseconds`] [INFO] [$HOSTNAME] - "$1" >> /proc/1/fd/0
+}
+
+T="/usr/bin/talosctl -n $HOSTNAME -e $HOSTNAME "
+
+logi "Invoke: $0 $*"
+
+for i in "$@"; do
+  case $i in
+    -r)
+      logw "Invoke REBOOT"
+      $T reboot 
+      shift # past argument=value
+      ;;
+    -H)
+      logw "Invoke SHUTDOWN"
+      $T shutdown 
+      shift # past argument=value
+      ;;
+    -h)
+      shift # past argument=value
+      ;;
+    -P)
+      logw "Invoke SHUTDOWN"
+      $T shutdown 
+      shift # past argument=value
+      ;;
+    -*)
+      exit 1
+      ;;
+    *)
+      #echo "Ignore Duration $i"
+      ;;
+  esac
+done
