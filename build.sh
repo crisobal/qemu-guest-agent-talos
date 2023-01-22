@@ -1,7 +1,7 @@
 #!/bin/bash
 
 IMAGE="qemu-guest-agent-talos"
-VERSION="v0.0.1"
+VERSION="v0.0.2"
 
 TARGET="ghcr.io/crisobal/$IMAGE:$VERSION"
 TARGET_LATEST="ghcr.io/crisobal/$IMAGE:latest"
