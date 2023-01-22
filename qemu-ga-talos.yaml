@@ -23,7 +23,7 @@ spec:
            optional: false 
       containers:
       - name: qemu-ga-talos
-        image: e3ag/qemu-ga-talos:latest
+        image: ghcr.io/crisobal/qemu-guest-agent-talos:v0.0.1
         imagePullPolicy: IfNotPresent
         securityContext:
           privileged: true
@@ -33,8 +33,6 @@ spec:
         - name: talosconfig
           mountPath: /var/run/secrets/talos.dev
           readOnly: true
-      imagePullSecrets:
-      - name: regcred
       restartPolicy: Always
       hostNetwork: true
       terminationGracePeriodSeconds: 30

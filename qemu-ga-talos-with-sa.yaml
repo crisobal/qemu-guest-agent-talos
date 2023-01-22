@@ -15,7 +15,7 @@ spec:
         name: qemu-ga-talos
     spec:
       containers:
-      - image: e3ag/qemu-ga-talos:latest
+      - image: ghcr.io/crisobal/qemu-guest-agent-talos:v0.0.1
         imagePullPolicy: IfNotPresent
         name: qemu-ga-talos
         resources: {}
@@ -31,8 +31,6 @@ spec:
           name: talos-secrets
       dnsPolicy: ClusterFirst
       hostNetwork: true
-      imagePullSecrets:
-      - name: regcred
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
