@@ -1,10 +1,10 @@
 #!/bin/bash
 
-IMAGE="qemu-ga-talos"
+IMAGE="qemu-guest-agent-talos"
 VERSION="v0.0.1"
 
-TARGET="docker.io/e3ag/$IMAGE:$VERSION"
-TARGET_LATEST="docker.io/e3ag/$IMAGE:latest"
+TARGET="ghcr.io/crisobal/$IMAGE:$VERSION"
+TARGET_LATEST="ghcr.io/crisobal/$IMAGE:latest"
 
 podman build -t "${IMAGE}:${VERSION}" .
 
