@@ -19,6 +19,32 @@ Otherwise just create the secret using:
 k create secret -n qemu-guest-agent generic talosconfig --from-file=config=<path to your config>
 ```
 
+## Admission controller security
+As the container runs as root and uses a hostFolder mount for the virtio device, it required either the PodSecurity being set very low or better switch it of for the qemu-quest-agent namespace.
+```
+            admissionControl:
+            - name: PodSecurity
+              configuration:
+                apiVersion: pod-security.admission.config.k8s.io/v1alpha1
+                defaults:
+                    audit: restricted
+                    audit-version: latest
+                    enforce: baseline
+                    enforce-version: latest
+                    warn: restricted
+                    warn-version: latest
+                exemptions:
+                    namespaces:
+                        - kube-system
+                        - quemu-guest-agent
+                    runtimeClasses: []
+                    usernames: []
+                kind: PodSecurityConfiguratio
+```
+
+Set this in your control plane config using talosctl.
+
+
 ## Pull Secret (only for private registries)
 -----------
 Create image pull secret with your docker or podman auth.json / client.json. This is only required in case you pull from a private registry
