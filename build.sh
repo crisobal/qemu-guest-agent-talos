@@ -1,14 +1,34 @@
 #!/bin/bash
 
 IMAGE="qemu-guest-agent-talos"
-VERSION="v0.0.2"
+VERSION="v0.0.3-SNAPSHOT"
 
-TARGET="ghcr.io/crisobal/$IMAGE:$VERSION"
-TARGET_LATEST="ghcr.io/crisobal/$IMAGE:latest"
+REPO="ghcr.io/crisobal"
+
+tag(){
+    SRC=$1
+    TGT=$2
+    echo ""
+    echo "Tag image: ${SRC} -> ${TGT}"
+    podman tag ${SRC} ${TGT}
+}
+
+push(){
+    TGT=$1
+    echo ""
+    echo "Push to: ${TGT}"
+    podman push ${TGT}
+}
+
+release(){
+    SRC=$IMAGE:$VERSION
+    TGT=$1/${IMAGE}:$2
+    tag ${SRC} ${TGT}
+    push ${TGT}
+}
 
 podman build -t "${IMAGE}:${VERSION}" .
 
-podman tag $IMAGE:$VERSION $TARGET
-podman tag $IMAGE:$VERSION $TARGET_LATEST
-podman push $TARGET
-podman push $TARGET_LATEST
+
+release ${REPO} ${VERSION}
+release ${REPO} "latest"
