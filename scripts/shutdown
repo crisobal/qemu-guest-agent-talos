@@ -10,11 +10,11 @@
 LOGFILE=/var/log/qemu-ga.log
 
 logw(){
-  echo [`date -u -Iseconds`] [WARN] [$HOSTNAME] - "$1" >> $LOGFILE
+  echo [`date -u -Iseconds`] [WARN] [$HOSTNAME] - "$1" > $LOGFILE
 }
 
 logi(){
-  echo [`date -u -Iseconds`] [INFO] [$HOSTNAME] - "$1" >> $LOGFILE
+  echo [`date -u -Iseconds`] [INFO] [$HOSTNAME] - "$1" > $LOGFILE
 }
 
 T="/usr/bin/talosctl -n $HOSTNAME -e $HOSTNAME "

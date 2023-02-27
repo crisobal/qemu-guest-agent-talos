@@ -12,7 +12,7 @@ RUN apk --no-cache add qemu-guest-agent && \
     wget https://github.com/siderolabs/talos/releases/download/v1.3.5/talosctl-linux-amd64 && \
     mv talosctl-linux-amd64 /usr/bin/talosctl && \
     chmod 755 /usr/bin/talosctl && \
-    mkfifo /var/log/qemu-ga.log && \
+    touch /var/log/qemu-ga.log && \
     chmod 777 /var/log/qemu-ga.log
 
 USER root

@@ -9,8 +9,8 @@
 
 LOGFILE=/var/log/qemu-ga.log
 
-echo "Startup qemu-guest-agent" >> $LOGFILE
+ln -sf /proc/1/fd/1 $LOGFILE
 
-tail --pid=$$ -f $LOGFILE &
+echo "Startup qemu-guest-agent" > $LOGFILE
 
-qemu-ga &2>1 >> $LOGFILE 
+qemu-ga -l $LOGFILE
