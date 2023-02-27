@@ -7,13 +7,14 @@
 # can be used for qemu-guest-agent daemon pod to reboot the host in case e.g. proxmox requests it
 #
 
+LOGFILE=/var/log/qemu-ga.log
 
 logw(){
-  echo [`date -u -Iseconds`] [WARN] [$HOSTNAME] - "$1" >> /proc/1/fd/0
+  echo [`date -u -Iseconds`] [WARN] [$HOSTNAME] - "$1" >> $LOGFILE
 }
 
 logi(){
-  echo [`date -u -Iseconds`] [INFO] [$HOSTNAME] - "$1" >> /proc/1/fd/0
+  echo [`date -u -Iseconds`] [INFO] [$HOSTNAME] - "$1" >> $LOGFILE
 }
 
 T="/usr/bin/talosctl -n $HOSTNAME -e $HOSTNAME "
