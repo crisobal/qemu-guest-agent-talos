@@ -1,0 +1,87 @@
+# based on example from 
+#  - https://docs.docker.com/build/ci/github-actions/examples/
+#  - https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
+#
+# See also: 
+# - https://github.com/actions/checkout
+# - https://github.com/actions/cache
+# - https://github.com/docker/setup-buildx-action
+# 
+name: ci
+
+on:
+  push:
+    branches:
+    - '**'
+    tags-ignore:
+    - '**'
+    # ignore github repo settings and all readme adoc changes
+    paths-ignore:
+    - '.github/*.yml'
+    - '**/*.adoc'
+    - '**/*.md'
+    
+  # once every week sunday 03:22
+  schedule:   
+    - cron: '22 03 * * 0'
+  pull_request:
+  workflow_dispatch:    
+
+env:
+  IMAGE-PATH: ${{ github.repository }}
+  IMAGE-REGISTRY: ghcr.io
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Git Checkout
+      uses: actions/checkout@v3 
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+      # https://github.com/docker/setup-buildx-action
+
+    - name: Set up Docker Buildx
+      id: buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Docker meta
+      id: my_meta # you'll use this in the next step
+      uses: docker/metadata-action@v4            
+      with:
+        # list of Docker images to use as base name for tags
+        images: |
+          ${{ env.IMAGE-REGISTRY }}/${{ env.IMAGE-PATH }}
+          # Docker tags based on the following events/attributes
+        tags: |
+          type=schedule
+          type=ref,event=branch
+          type=ref,event=pr
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}
+          type=semver,pattern={{major}}
+          type=sha
+    - name: Login to docker repo      
+      uses: docker/login-action@v2
+      with:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: ${{ env.IMAGE-REGISTRY}}    
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        platforms: linux/amd64
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: ${{ steps.my_meta.outputs.tags }}
+        labels: ${{ steps.my_meta.outputs.labels }}
+        
+        
+        
+
+  
