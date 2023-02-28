@@ -29,7 +29,7 @@ on:
 
 env:
   IMAGE-PATH: ${{ github.repository }}
-  IMAGE-REPO: ghcr.io
+  IMAGE-REGISTRY: ghcr.io
 defaults:
   run:
     shell: bash
@@ -56,7 +56,7 @@ jobs:
       with:
         # list of Docker images to use as base name for tags
         images: |
-          ${{ env.IMAGE-REPO }}/${{ env.IMAGE-PATH }}
+          ${{ env.IMAGE-REGISTRY }}/${{ env.IMAGE-PATH }}
           # Docker tags based on the following events/attributes
         tags: |
           type=schedule
@@ -71,7 +71,7 @@ jobs:
       with:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
-        registry: ${{ env.IMAGE-REPO}}    
+        registry: ${{ env.IMAGE-REGISTRY}}    
     - name: Build and push
       uses: docker/build-push-action@v2
       with:
@@ -80,8 +80,6 @@ jobs:
         push: ${{ github.event_name != 'pull_request' }}
         tags: ${{ steps.my_meta.outputs.tags }}
         labels: ${{ steps.my_meta.outputs.labels }}
-   
-    
         
         
         
