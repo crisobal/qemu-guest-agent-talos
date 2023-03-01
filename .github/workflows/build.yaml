@@ -7,7 +7,7 @@
 # - https://github.com/actions/cache
 # - https://github.com/docker/setup-buildx-action
 # 
-name: ci
+name: build
 
 on:
   push:
