@@ -1,6 +1,4 @@
-[![build](https://github.com/crisobal/qemu-guest-agent-talos/actions/workflows/build.yaml/badge.svg?branch=main)](https://github.com/crisobal/qemu-guest-agent-talos/actions/workflows/build.yaml)
-[![build](https://github.com/crisobal/qemu-guest-agent-talos/actions/workflows/build.yaml/badge.svg?branch=develop)](https://github.com/crisobal/qemu-guest-agent-talos/actions/workflows/build.yaml)
-
+[![build](https://github.com/crisobal/qemu-guest-agent-talos/actions/workflows/build.yaml/badge.svg)](https://github.com/crisobal/qemu-guest-agent-talos/actions/workflows/build.yaml)
 
 # Motivation
 Virtual machines running on proxmox should have the qemu-guest-agent installed as it improves the way virtual machines are restarted as it does not simply rely on virtualized ACPI commands. Additionally qemu-guest-agent provides information like network addresses.  Unfortunately talos linux does not feature the qemu-quest-agent. 
