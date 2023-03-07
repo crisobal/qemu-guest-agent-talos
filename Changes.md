@@ -1,4 +1,9 @@
 # Changes
+## v0.0.4-dev
+__Fiexes:__
+- Typos in readme
+- Build Status in readme
+
 ## v0.0.3
 __Fixes:__
 - Fixed Logging, so actions initiated by hypervisor are correctly logged
