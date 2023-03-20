@@ -25,7 +25,7 @@ k create secret -n qemu-guest-agent generic talosconfig --from-file=config=<path
 ```
 
 ## Admission controller security
-As the container runs as root and uses a hostFolder mount for the virtio device, it required either the PodSecurity being set very low or better switch it of for the `qemu-quest-agent` namespace.
+As the container runs as root and uses a hostFolder mount for the virtio device, it requires either the PodSecurity being set very low or better switch it of for the `qemu-quest-agent` namespace.
 ```
             admissionControl:
             - name: PodSecurity
