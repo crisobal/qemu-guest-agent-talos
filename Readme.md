@@ -39,7 +39,7 @@ As the container runs as root and uses a hostFolder mount for the virtio device,
                 exemptions:
                     namespaces:
                         - kube-system
-                        - quemu-guest-agent
+                        - qemu-guest-agent
                     runtimeClasses: []
                     usernames: []
                 kind: PodSecurityConfiguratio
