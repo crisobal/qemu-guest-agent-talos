@@ -9,7 +9,7 @@ COPY ./scripts/service.sh /usr/local/bin/service.sh
 
 RUN apk --no-cache add qemu-guest-agent && \
     echo "$arch" && \
-    wget https://github.com/siderolabs/talos/releases/download/v1.3.5/talosctl-linux-amd64 && \
+    wget https://github.com/siderolabs/talos/releases/download/v1.4.4/talosctl-linux-amd64 && \
     mv talosctl-linux-amd64 /usr/bin/talosctl && \
     chmod 755 /usr/bin/talosctl && \
     touch /var/log/qemu-ga.log && \
