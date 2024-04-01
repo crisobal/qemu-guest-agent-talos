@@ -1,8 +1,10 @@
 # Changes
-## v0.0.4-dev
+## v0.0.4
 __Fiexes:__
 - Typos in readme
 - Build Status in readme
+__New:__
+- Update talosctl to v1.6.7
 
 ## v0.0.3
 __Fixes:__

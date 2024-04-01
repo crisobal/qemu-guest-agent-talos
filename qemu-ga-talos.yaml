@@ -28,7 +28,7 @@ spec:
            optional: false 
       containers:
       - name: qemu-ga-talos
-        image: ghcr.io/crisobal/qemu-guest-agent-talos:0.1.0
+        image: ghcr.io/crisobal/qemu-guest-agent-talos:0.4.0
         imagePullPolicy: IfNotPresent
         securityContext:
           privileged: true
