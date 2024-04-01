@@ -1,7 +1,7 @@
 #!/bin/bash
 
 IMAGE="qemu-guest-agent-talos"
-VERSION="0.5.0-SNAPSHOT"
+VERSION="0.5.0"
 
 REPO="ghcr.io/crisobal"
 
