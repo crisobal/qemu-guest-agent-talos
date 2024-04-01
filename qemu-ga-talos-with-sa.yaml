@@ -20,7 +20,7 @@ spec:
         name: qemu-ga-talos
     spec:
       containers:
-      - image: ghcr.io/crisobal/qemu-guest-agent-talos:0.1.0
+      - image: ghcr.io/crisobal/qemu-guest-agent-talos:0.5.0
         imagePullPolicy: IfNotPresent
         name: qemu-ga-talos
         resources: {}
